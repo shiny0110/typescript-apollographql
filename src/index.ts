@@ -22,7 +22,7 @@ async function startApolloServer() {
             const { cache } = server;
             return {
               dataSources: {
-                spotifyAPI: new SpotifyAPI(),
+                spotifyApi: new SpotifyAPI({ cache }),
               },
             };
           },

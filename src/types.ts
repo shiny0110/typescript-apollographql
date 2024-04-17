@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { DataSourceContext } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -119,18 +120,18 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
 };
 
-export type PlayListResolvers<ContextType = any, ParentType extends ResolversParentTypes['PlayList'] = ResolversParentTypes['PlayList']> = {
+export type PlayListResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['PlayList'] = ResolversParentTypes['PlayList']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   featuredPlaylists?: Resolver<Array<Maybe<ResolversTypes['PlayList']>>, ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = DataSourceContext> = {
   PlayList?: PlayListResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
