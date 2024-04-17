@@ -7,6 +7,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -17,8 +18,8 @@ export type Scalars = {
 };
 
 /** A curated collection of tracks designed for a specific activity or mood. */
-export type PlayList = {
-  __typename?: 'PlayList';
+export type Playlist = {
+  __typename?: 'Playlist';
   /** Describes the playlist, what to expect and entices the user to listen. */
   description?: Maybe<Scalars['String']['output']>;
   /** The ID for the playlist. */
@@ -30,7 +31,14 @@ export type PlayList = {
 export type Query = {
   __typename?: 'Query';
   /** Playlists hand-picked to be featured to all users. */
-  featuredPlaylists: Array<Maybe<PlayList>>;
+  featuredPlaylists: Array<Maybe<Playlist>>;
+  /** Retrieves a specific playlist. */
+  playlist?: Maybe<Playlist>;
+};
+
+
+export type QueryPlaylistArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -106,7 +114,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
-  PlayList: ResolverTypeWrapper<PlayList>;
+  Playlist: ResolverTypeWrapper<Playlist>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
@@ -115,12 +123,12 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   ID: Scalars['ID']['output'];
-  PlayList: PlayList;
+  Playlist: Playlist;
   Query: {};
   String: Scalars['String']['output'];
 };
 
-export type PlayListResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['PlayList'] = ResolversParentTypes['PlayList']> = {
+export type PlaylistResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Playlist'] = ResolversParentTypes['Playlist']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -128,11 +136,12 @@ export type PlayListResolvers<ContextType = DataSourceContext, ParentType extend
 };
 
 export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  featuredPlaylists?: Resolver<Array<Maybe<ResolversTypes['PlayList']>>, ParentType, ContextType>;
+  featuredPlaylists?: Resolver<Array<Maybe<ResolversTypes['Playlist']>>, ParentType, ContextType>;
+  playlist?: Resolver<Maybe<ResolversTypes['Playlist']>, ParentType, ContextType, RequireFields<QueryPlaylistArgs, 'id'>>;
 };
 
 export type Resolvers<ContextType = DataSourceContext> = {
-  PlayList?: PlayListResolvers<ContextType>;
+  Playlist?: PlaylistResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
