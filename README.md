@@ -29,8 +29,36 @@ For further reference, please consider the following sections:
 * [Official TypeScript documentation]([https://docs.gradle.org](https://www.typescriptlang.org/docs/))
 
 
+### Installing Apollo Server Dependency
+
+`npm install @apollo/server graphql graphql-tag`
 
 
+### Setting up our data source
+
+`npm install @apollo/datasource-rest`
 
 
+### Project Structure
 
+📂 src
+
+ ┣ 📂 datasources
+
+ ┃ ┣ 📄 spotify-api.ts
+
+ ┣ 📄 graphql.d.ts
+
+ ┣ 📄 index.ts
+
+ ┗ 📄 schema.graphql
+
+### Installing Dependencies
+
+
+`npm install -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-resolvers`
+
+
+### Generating Types
+
+`npm run generate`
