@@ -42,16 +42,21 @@ For further reference, please consider the following sections:
 ### Project Structure
 
 📂 src
-
  ┣ 📂 datasources
 
- ┃ ┣ 📄 spotify-api.ts
+ ┣ 📄 context.ts
 
  ┣ 📄 graphql.d.ts
 
  ┣ 📄 index.ts
 
- ┗ 📄 schema.graphql
+ ┣ 📄 models.ts
+
+ ┣ 📄 resolvers.ts
+
+ ┣ 📄 schema.graphql
+
+ ┗ 📄 types.ts
 
 ### Installing Dependencies
 

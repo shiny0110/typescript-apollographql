@@ -9,4 +9,13 @@ export const resolvers: Resolvers = {
       return dataSources.spotifyApi.getPlaylist(id);
     }
   },
+  Playlist: {
+    tracks: ({ tracks }) => {
+      const { items = [] } = tracks;
+      return items.map(({ track }) => track);
+    }
+  },
+  Track: {
+    durationMs: (parent) => parent.duration_ms
+  },
 };
