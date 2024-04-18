@@ -10,7 +10,7 @@ const config: CodegenConfig = {
                 mappers: {
                     Playlist: "./models#PlaylistModel",
                     Track: "./models#TrackModel",
-                    SnapshotOrError: "./models#SnapshotOrError",
+                    AddItemsToPlaylistPayload: "./models#AddItemsToPlaylistPayloadModel",
                 },
             },
         },

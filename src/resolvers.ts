@@ -28,7 +28,7 @@ export const resolvers: Resolvers = {
             code: 200,
             success: true,
             message: "Tracks added to playlist!",
-            playlist: null
+            playlistId: response.snapshot_id
           };
         } else {
           throw Error("snapshot_id property not found");
@@ -38,9 +38,14 @@ export const resolvers: Resolvers = {
           code: 500,
           success: false,
           message: `Something went wrong: ${err}`,
-          playlist: null,
+          playlistId: null
         };
       }
     },
   },
+  AddItemsToPlaylistPayload: {
+    playlist: ({ playlistId }, _, { dataSources }) => {
+      return dataSources.spotifyApi.getPlaylist(playlistId);
+    },
+  }
 };
